@@ -27,6 +27,7 @@ const Button = styled.button`
   border: 1px solid white;
   outline: none;
   border-radius: 6px;
+  font-family: inherit;
 `
 
 const SignInButton = styled(Button)<{signInButtonColor: string}>`

@@ -32,6 +32,7 @@ const Input = styled.input`
   border-bottom: 1px solid grey;
   padding: 12px 8px;
   outline: none;
+  font-family: inherit;
   &:focus {
     outline: none;
   };
