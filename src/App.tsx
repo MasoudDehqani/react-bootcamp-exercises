@@ -7,7 +7,7 @@ import Form from "./components/form/Form"
 function App() {
   return (
     // <Counter maxCount={10} step={2} />
-    <Form />
+    <LoginForm />
   );
 }
 

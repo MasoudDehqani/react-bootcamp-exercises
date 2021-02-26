@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from "styled-components"
-import Buttons from './Buttons'
-import Inputs from "./Inputs"
+import Button from './Button'
+import Input from "./Input"
 import Image from "./Image"
 
 const StyledForm = styled.form`
@@ -19,16 +19,26 @@ function LoginForm() {
   return (
     <StyledForm>
       <Image imageUrl="https://image.flaticon.com/icons/svg/145/145867.svg" />
-      <Inputs 
-        usernameText="Username" 
-        passwordText="Password"
+      <Input 
+        type="text"
+        id="username"
+        name="username"
       />
-      <Buttons 
-        signInButtonText="Sign In"
-        signInButtonColor="lightgreen"
-        signUpButtonText="Sign Up"
-        signUpButtonColor="royalblue"
+      <Input 
+        type="text"
+        id="password"
+        name="password"
       />
+      <div style={{display: "flex", marginTop: "30px", justifyContent: "space-evenly"}}>
+        <Button 
+          text="Sign In"
+          color="lightgreen"
+        />
+        <Button 
+          text="Sign Up"
+          color="royalblue"
+        />
+      </div>
     </StyledForm>
   )
 }
