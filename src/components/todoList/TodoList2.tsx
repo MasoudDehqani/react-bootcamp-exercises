@@ -107,7 +107,7 @@ function TodoList2() {
   function addButtonClickHandler() {
     let repeated = false
     tasksStatusState.forEach( ({text}) => {
-      if (text === addInput) repeated = true
+      if (text.trim().toLocaleLowerCase() === addInput.trim().toLocaleLowerCase()) repeated = true
     })
     if (!repeated) {
       let taskStatus = {
@@ -148,12 +148,17 @@ function TodoList2() {
 
   function editHandle(id: string, newText: string) {
     let isRepeated = false
-    let copy = tasksStatusState.slice()
-    tasksStatusState.forEach( ({text}) => text.trim() === newText.trim() && (isRepeated = true))
-    copy.forEach( task => {
-      if (id === task.id && !isRepeated) task.text = newText
-    })
-    setTasksStatusState(copy)
+    // let copy = tasksStatusState.map( task => ({...task}))
+    tasksStatusState.forEach( ({text}) => 
+    text.trim().toLocaleLowerCase() === newText.trim().toLocaleLowerCase() && (isRepeated = true))
+    // copy.forEach( task => {
+    //   if (id === task.id && !isRepeated) task.text = newText
+    // })
+    // setTasksStatusState(copy)
+    setTasksStatusState(tasksStatusState.map( task => {
+      if (id === task.id && !isRepeated) return {...task, text: newText}
+      return task
+    }))
     return !isRepeated
   }
 
