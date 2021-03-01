@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { ClearAll } from "@material-ui/icons";
+import IconButton from "@material-ui/core/IconButton";
+import Box from "@material-ui/core/Box"
+
 
 // import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
@@ -12,11 +16,19 @@ import {
   fade,
   // ThemeProvider,
   withStyles,
-  // makeStyles,
+  makeStyles,
   // createMuiTheme,
 } from '@material-ui/core/styles';
 
+
 import InputBase from '@material-ui/core/InputBase';
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    margin: theme.spacing(1),
+    padding: "11px 30px",
+  },
+}));
 
 const AddInput = withStyles((theme) => ({
   root: {
@@ -146,7 +158,7 @@ function TodoList2() {
   }
 
   function doneHandle(id: string, done: boolean) {
-    // let copy = tasksStatusState.slice()
+    // let copy = tasksStatusState.map( task => ({...task}))
     // copy.forEach( task => {
     //   if (task.id === id) task.done = !task.done
     // })
@@ -155,10 +167,12 @@ function TodoList2() {
     setTasksStatusState(tasksStatusState.map( task => {
       if (task.id !== id) return task
       return {...task, done: !task.done}
-      // return {...task, done: !task.done}
     }))
-    console.log(tasksStatusState)
     // setStateChange(!stateChange)
+  }
+
+  function clearAllButtonHandle() {
+    setTasksStatusState([])
   }
 
   let taskList = tasksStatusState.map( ({id, text, done, edited, deleted}) => {
@@ -178,6 +192,8 @@ function TodoList2() {
     )
   })
 
+  let classes = useStyles()
+
   return (
     <>
       <Container>
@@ -185,6 +201,22 @@ function TodoList2() {
         <Button disabled={!addInput && true} type="submit" variant="contained" style={styles.addButton} onClick={addButtonClickHandler}>ADD</Button>
       </Container>
       {taskList}
+      {/* <IconButton>
+        <ClearAll />
+      </IconButton> */}
+      {!!taskList.length && 
+      <Box display='flex' justifyContent='center' marginTop={5}>
+        <Button
+          variant="contained"
+          color="secondary"
+          className={classes.button}
+          // className={classes.button}
+          startIcon={<ClearAll />}
+          onClick={clearAllButtonHandle}
+        >
+          Clear All
+        </Button>
+      </Box>}
     </>
   )
 }

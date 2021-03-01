@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 
 import styled from "styled-components"
-import { Save, Delete, Edit } from "@material-ui/icons";
-import { Grid, Paper, TextField } from "@material-ui/core";
+import { DeleteForever, Edit, ClearAll } from "@material-ui/icons";
+import { Grid, Paper } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
-import Input from "@material-ui/core/Input";
+// import Input from "@material-ui/core/Input";
 import {
   fade,
-  ThemeProvider,
+  // ThemeProvider,
   withStyles,
-  makeStyles,
-  createMuiTheme,
+  // makeStyles,
+  // createMuiTheme,
 } from '@material-ui/core/styles';
 
 import InputBase from '@material-ui/core/InputBase';
@@ -122,7 +122,7 @@ function Task2(
           <Edit fontSize="small" />
         </IconButton>
         <IconButton color="secondary" aria-label="Delete" onClick={() => deleteButtonClickHandle(id)} >
-          <Delete fontSize="small" />
+          <DeleteForever fontSize="small" />
         </IconButton>
       </Paper>
     </Grid>  
