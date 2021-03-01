@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react'
 
-import Input from "@material-ui/core/Input";
+// import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
-import green from "@material-ui/core/colors/green"
+// import green from "@material-ui/core/colors/green"
 
 import Task2 from "./Task2"
 import styled from "styled-components"
-import { TextField } from '@material-ui/core';
+// import { TextField } from '@material-ui/core';
 
 import {
   fade,
-  ThemeProvider,
+  // ThemeProvider,
   withStyles,
-  makeStyles,
-  createMuiTheme,
+  // makeStyles,
+  // createMuiTheme,
 } from '@material-ui/core/styles';
 
 import InputBase from '@material-ui/core/InputBase';
@@ -34,18 +34,18 @@ const AddInput = withStyles((theme) => ({
     padding: '10px 12px',
     transition: theme.transitions.create(['border-color', 'box-shadow']),
     // Use the system font instead of the default Roboto font.
-    fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(','),
+    // fontFamily: [
+    //   '-apple-system',
+    //   'BlinkMacSystemFont',
+    //   '"Segoe UI"',
+    //   'Roboto',
+    //   '"Helvetica Neue"',
+    //   'Arial',
+    //   'sans-serif',
+    //   '"Apple Color Emoji"',
+    //   '"Segoe UI Emoji"',
+    //   '"Segoe UI Symbol"',
+    // ].join(','),
     '&:focus': {
       boxShadow: `${fade(theme.palette.success.main, 0.25)} 0 0 0 0.2rem`,
       borderColor: theme.palette.primary.main,
@@ -68,7 +68,13 @@ const styles = {
   },
 }
 
-let tasksStatus: any[] = []
+type tasksStatus = {
+  id: string;
+  text: string;
+  done: boolean;
+  edited: boolean;
+  deleted: boolean;
+}[]
 
 function TodoList2() {
 
@@ -76,6 +82,7 @@ function TodoList2() {
   // const [text, setText] = useState('')
   // const [taskStatus, setTaskStatus] = useState({})
   const [stateChange, setStateChange] = useState(false)
+  const [tasksStatusState, setTasksStatusState] = useState<tasksStatus>([])
 
   function inputValueChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
     setAddInput(e.target.value)
@@ -87,7 +94,7 @@ function TodoList2() {
 
   function addButtonClickHandler() {
     let repeated = false
-    tasksStatus.forEach( ({text}) => {
+    tasksStatusState.forEach( ({text}) => {
       if (text === addInput) repeated = true
     })
     if (!repeated) {
@@ -98,7 +105,10 @@ function TodoList2() {
         edited: false,
         deleted: false
       }
-      tasksStatus.push(taskStatus)
+      // tasksStatus.push(taskStatus)
+      //@ts-ignore
+      setTasksStatusState( prev => prev.concat(taskStatus))
+      console.log(tasksStatusState)
       setAddInput('')
       // setStateChange(!stateChange)
     }
@@ -117,28 +127,41 @@ function TodoList2() {
   }
 
   function deleteHandle(id: string) {
-    tasksStatus = tasksStatus.filter( task => task.id !== id)
-    setStateChange(!stateChange)
+    console.log(tasksStatusState)
+    //@ts-ignore
+    setTasksStatusState(tasksStatusState.filter( task => task.id !== id))
+    // tasksStatus = tasksStatus.filter( task => task.id !== id)
+    // setStateChange(!stateChange)
   }
 
   function editHandle(id: string, newText: string) {
     let isRepeated = false
-    tasksStatus.forEach( ({text}) => text.trim() === newText.trim() && (isRepeated = true))
-    tasksStatus.forEach( task => {
+    let copy = tasksStatusState.slice()
+    tasksStatusState.forEach( ({text}) => text.trim() === newText.trim() && (isRepeated = true))
+    copy.forEach( task => {
       if (id === task.id && !isRepeated) task.text = newText
     })
-    setStateChange(!stateChange)
+    setTasksStatusState(copy)
     return !isRepeated
   }
 
   function doneHandle(id: string, done: boolean) {
-    tasksStatus.forEach( task => {
-      if (task.id === id) task.done = !task.done
-    })
-    setStateChange(!stateChange)
+    // let copy = tasksStatusState.slice()
+    // copy.forEach( task => {
+    //   if (task.id === id) task.done = !task.done
+    // })
+    // setTasksStatusState(copy)
+    //@ts-ignore
+    setTasksStatusState(tasksStatusState.map( task => {
+      if (task.id !== id) return task
+      return {...task, done: !task.done}
+      // return {...task, done: !task.done}
+    }))
+    console.log(tasksStatusState)
+    // setStateChange(!stateChange)
   }
 
-  let taskList = tasksStatus.map( ({id, text, done, edited, deleted}) => {
+  let taskList = tasksStatusState.map( ({id, text, done, edited, deleted}) => {
     return (
       <Task2 
         key={id} 
