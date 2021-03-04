@@ -1,14 +1,22 @@
-import { useReducer, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { addGrudgeAction, removeAction, toggleForgiveAction } from './actions';
 import Grudge from './Grudge';
 import GrudgeItem from './grudge.model';
 import grudgeReducer from './reducer';
 
+
+
 const GrudgeList = () => {
   // const [items, setItems] = useState([]);
-  const [items, dispatch] = useReducer(grudgeReducer, []);
+  const [items, dispatch] = useReducer(grudgeReducer, getState());
   const [personName, setPersonName] = useState('');
   const [reason, setReason] = useState('');
+
+  function getState() {
+    const savedState = localStorage.getItem('savedState')
+    if (savedState === null) return []
+    return JSON.parse(savedState)
+  }
 
   const addGrudge = event => {
     event.preventDefault();
@@ -33,6 +41,10 @@ const GrudgeList = () => {
   };
 
   const changeInput = () => setPersonName('Forough');
+
+  useEffect(() => {
+    localStorage.setItem('savedState', JSON.stringify(items))
+  }, [items])
 
   return (
     <div>
