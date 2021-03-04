@@ -1,4 +1,6 @@
-const Grudge = ({ grudge, onRemove, onToggle }) => {
+import { GrudgeItemType } from "./grudge.model";
+
+const Grudge = ({ grudge, onRemove, onToggle } : {grudge: GrudgeItemType, onRemove: Function, onToggle: Function}) => {
   return (
     <li>
       <input

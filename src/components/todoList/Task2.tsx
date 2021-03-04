@@ -108,6 +108,7 @@ function Task2(
     if (e.key === "Enter") {
       let isChanged = editButtonClickHandle(id, target.value)
       isChanged && setInEditMode(false)
+      !isChanged && setInEditMode(true)
     }
   }
 

@@ -4,7 +4,16 @@ export const actionTypes = {
   TOGGLE_FORGIVENESS: 'TOGGLE_FORGIVENESS'
 };
 
-export const addGrudgeAction = (personName, reason) => ({
+export interface ActionsType {
+  type: string;
+  payload: {
+    personName?: string;
+    reason?: string;
+    id?: string;
+  }
+}
+
+export const addGrudgeAction = (personName: string, reason: string) => ({
   type: actionTypes.ADD_GRUDGE,
   payload: {
     personName,
@@ -12,14 +21,14 @@ export const addGrudgeAction = (personName, reason) => ({
   }
 });
 
-export const removeAction = id => ({
+export const removeAction = (id: string) => ({
   type: actionTypes.REMOVE_GRUDGE,
   payload: {
     id
   }
 })
 
-export const toggleForgiveAction = id => ({
+export const toggleForgiveAction = (id: string) => ({
   type: actionTypes.TOGGLE_FORGIVENESS,
   payload: {
     id

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { ClearAll } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
 import Box from "@material-ui/core/Box"
+import FormHelperText from "@material-ui/core/FormHelperText"
 
 
 // import Input from "@material-ui/core/Input";
@@ -22,6 +23,7 @@ import {
 
 
 import InputBase from '@material-ui/core/InputBase';
+import { TextField } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -35,6 +37,33 @@ const AddInput = withStyles((theme) => ({
     'label + &': {
       marginTop: theme.spacing(3),
     },
+    '& > div > input': {
+      borderRadius: 4,
+    position: 'relative',
+    backgroundColor: theme.palette.common.white,
+    border: '1px solid #ced4da',
+    fontSize: 16,
+    width: 'auto',
+    padding: '10px 12px',
+    transition: theme.transitions.create(['border-color', 'box-shadow']),
+    // Use the system font instead of the default Roboto font.
+    // fontFamily: [
+    //   '-apple-system',
+    //   'BlinkMacSystemFont',
+    //   '"Segoe UI"',
+    //   'Roboto',
+    //   '"Helvetica Neue"',
+    //   'Arial',
+    //   'sans-serif',
+    //   '"Apple Color Emoji"',
+    //   '"Segoe UI Emoji"',
+    //   '"Segoe UI Symbol"',
+    // ].join(','),
+    '&:focus': {
+      boxShadow: `${fade(theme.palette.success.main, 0.25)} 0 0 0 0.2rem`,
+      borderColor: theme.palette.success.main,
+    }
+    }
   },
   input: {
     borderRadius: 4,
@@ -60,10 +89,10 @@ const AddInput = withStyles((theme) => ({
     // ].join(','),
     '&:focus': {
       boxShadow: `${fade(theme.palette.success.main, 0.25)} 0 0 0 0.2rem`,
-      borderColor: theme.palette.primary.main,
+      borderColor: theme.palette.success.main,
     },
   },
-}))(InputBase);
+}))(TextField);
 
 const Container = styled.div`
   display: flex;
@@ -76,7 +105,8 @@ const styles = {
   addButton: {
     backgroundColor: '#6EFF70',
     marginLeft: 10,
-    padding: "5px 40px"
+    padding: "5px 40px",
+    height: '80%'
   },
 }
 
@@ -95,6 +125,7 @@ function TodoList2() {
   // const [taskStatus, setTaskStatus] = useState({})
   const [stateChange, setStateChange] = useState(false)
   const [tasksStatusState, setTasksStatusState] = useState<tasksStatus>([])
+  const [errorRepeated, setErrorRepeated] = useState(false)
 
   function inputValueChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
     setAddInput(e.target.value)
@@ -108,6 +139,7 @@ function TodoList2() {
     let repeated = false
     tasksStatusState.forEach( ({text}) => {
       if (text.trim().toLocaleLowerCase() === addInput.trim().toLocaleLowerCase()) repeated = true
+      setErrorRepeated(true)
     })
     if (!repeated) {
       let taskStatus = {
@@ -120,8 +152,8 @@ function TodoList2() {
       // tasksStatus.push(taskStatus)
       //@ts-ignore
       setTasksStatusState( prev => prev.concat(taskStatus))
-      console.log(tasksStatusState)
       setAddInput('')
+      setErrorRepeated(false)
       // setStateChange(!stateChange)
     }
   }
@@ -201,8 +233,8 @@ function TodoList2() {
 
   return (
     <>
-      <Container>
-        <AddInput value={addInput} onChange={inputValueChangeHandler} onKeyDown={addInputKeyPressHandler} />
+      <Container style={{height: '50px'}}>
+        <AddInput variant="outlined" helperText={errorRepeated && 'error'} error={errorRepeated} value={addInput} onChange={inputValueChangeHandler} onKeyDown={addInputKeyPressHandler} />
         <Button disabled={!addInput && true} type="submit" variant="contained" style={styles.addButton} onClick={addButtonClickHandler}>ADD</Button>
       </Container>
       {taskList}

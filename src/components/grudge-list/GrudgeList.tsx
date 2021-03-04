@@ -1,7 +1,7 @@
 import { useEffect, useReducer, useState } from 'react';
 import { addGrudgeAction, removeAction, toggleForgiveAction } from './actions';
 import Grudge from './Grudge';
-import GrudgeItem from './grudge.model';
+import GrudgeItem, { GrudgeItemType } from './grudge.model';
 import grudgeReducer from './reducer';
 
 
@@ -18,20 +18,20 @@ const GrudgeList = () => {
     return JSON.parse(savedState)
   }
 
-  const addGrudge = event => {
+  const addGrudge = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(addGrudgeAction(personName, reason));
     setPersonName('');
     setReason('');
   };
 
-  const removeGrudge = id => {
+  const removeGrudge = (id: string) => {
     // const updatedItems = items.filter(grudge => grudge.id !== id);
     dispatch(removeAction(id))
     // setItems(updatedItems);
   };
 
-  const toggleForgiveness = id => {
+  const toggleForgiveness = (id: string) => {
     // const updatedItems = items.map(grudge => {
     //   if (grudge.id !== id) return grudge;
     //   return { ...grudge, forgiven: !grudge.forgiven };
@@ -48,7 +48,7 @@ const GrudgeList = () => {
 
   return (
     <div>
-      <form onSubmit={addGrudge}>
+      <form onSubmit={(e) => addGrudge(e)}>
         <input
           type='text'
           name='person'
@@ -68,7 +68,7 @@ const GrudgeList = () => {
       <button onClick={changeInput}>Change</button>
 
       <ul>
-        {items.map(item => (
+        {items.map((item: GrudgeItemType) => (
           <Grudge
             key={item.id}
             grudge={item}

@@ -1,7 +1,7 @@
-import { actionTypes } from './actions';
-import GrudgeItem from './grudge.model';
+import { ActionsType, actionTypes } from './actions';
+import GrudgeItem, { GrudgeItemType } from './grudge.model';
 
-export default function grudgeReducer(state, action) {
+export default function grudgeReducer(state: GrudgeItemType[], action: ActionsType) {
 
   switch (action.type) {
 
