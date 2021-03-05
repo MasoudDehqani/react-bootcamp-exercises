@@ -4,19 +4,17 @@ import Grudge from './Grudge';
 import GrudgeItem, { GrudgeItemType } from './grudge.model';
 import grudgeReducer from './reducer';
 
-
+function getState(initialState: []) {
+  const savedState = localStorage.getItem('savedState')
+  if (savedState === null) return initialState
+  return JSON.parse(savedState)
+}
 
 const GrudgeList = () => {
   // const [items, setItems] = useState([]);
-  const [items, dispatch] = useReducer(grudgeReducer, getState());
+  const [items, dispatch] = useReducer(grudgeReducer, [], getState);
   const [personName, setPersonName] = useState('');
   const [reason, setReason] = useState('');
-
-  function getState() {
-    const savedState = localStorage.getItem('savedState')
-    if (savedState === null) return []
-    return JSON.parse(savedState)
-  }
 
   const addGrudge = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
