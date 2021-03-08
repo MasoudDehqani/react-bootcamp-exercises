@@ -1,15 +1,18 @@
 import React from 'react';
 import './App.css';
-import GrudgeList from './components/grudge-list/GrudgeList';
+// import GrudgeList from './components/grudge-list/GrudgeList';
 // import LoginForm from "./components/login-form/LoginForm"
 // import Counter from "./components/counter/Counter"
 // import Form from "./components/form/Form"
-import TodoList2 from "./components/todoList/TodoList2"
+import TodoList from "./components/todoList/TodoList"
+//@ts-ignore
+import {ContextProvider} from "./components/todoList/todoListContext"
 
 function App() {
   return (
-    // <Counter maxCount={10} step={2} />
-    <GrudgeList />
+    <ContextProvider>
+      <TodoList />
+    </ContextProvider>
   );
 }
 
