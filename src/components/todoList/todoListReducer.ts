@@ -9,8 +9,10 @@ export interface TodoType {
   deleted: boolean;
 }
 
+export enum Actions {ADD = "ADD", DELETE = "DELETE", EDIT = "EDIT", DONETOGGLE = "DONETOGGLE", ADDINPUTHANDLE = "ADDINPUTHANDLE", CLEARALL = "CLEARALL"}
+
 interface AddAction {
-  type: string;
+  type: Actions.ADD;
   payload: {
     id: string;
     text: string;
@@ -24,7 +26,7 @@ interface AddAction {
 }
 
 interface AddInputHandle {
-  type: string;
+  type: Actions.ADDINPUTHANDLE;
   payload: {
     addInput: string;
     setAddInput: Function;
@@ -32,12 +34,12 @@ interface AddInputHandle {
 }
 
 interface DeleteAction {
-  type: string;
-  payload: string;
+  type: Actions.DELETE;
+  id: string;
 }
 
 interface DoneToggleAction {
-  type: string;
+  type: Actions.DONETOGGLE;
   payload: {
     id: string;
     done: boolean
@@ -45,7 +47,7 @@ interface DoneToggleAction {
 }
 
 interface EditAction {
-  type: string;
+  type: Actions.EDIT;
   payload: {
     id: string;
     newText: string;
@@ -53,9 +55,12 @@ interface EditAction {
   }
 }
 
-export type Action = AddAction & DeleteAction & DoneToggleAction & EditAction & AddInputHandle;
+interface ClearAll {
+  type: Actions.CLEARALL;
+}
 
-export enum Actions {ADD = "ADD", DELETE = "DELETE", EDIT = "EDIT", DONETOGGLE = "DONETOGGLE", ADDINPUTHANDLE = "ADDINPUTHANDLE", CLEARALL = "CLEARALL"}
+export type Action = AddAction | DeleteAction | DoneToggleAction | EditAction | AddInputHandle | ClearAll;
+
 
 export default function todoListReducer(state: TasksStatus, action: Action): TodoType[] {
 
@@ -87,7 +92,7 @@ export default function todoListReducer(state: TasksStatus, action: Action): Tod
       // break
 
     case Actions.DELETE:
-      return state.filter( task => task.id !== action.payload.id)
+      return state.filter( task => task.id !== action.id)
 
     case Actions.EDIT:
       return (

@@ -132,11 +132,10 @@ function TodoList() {
   // const [text, setText] = useState('')
   // const [taskStatus, setTaskStatus] = useState({})
   // const [stateChange, setStateChange] = useState(false)
-  const [tasksStatusState, setTasksStatusState] = useState<TasksStatus>([])
+  // const [tasksStatusState, setTasksStatusState] = useState<TasksStatus>([])
   const [errorRepeated, setErrorRepeated] = useState(false)
 
   function inputValueChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
-    //@ts-ignore
     todoContext.dispatch({type: Actions.ADDINPUTHANDLE, payload: {addInput: e.target.value, setAddInput }})
     // setAddInput(e.target.value)
   }
@@ -146,7 +145,6 @@ function TodoList() {
   // }, [stateChange])
 
   function addButtonClickHandler() {
-    //@ts-ignore
     todoContext.dispatch({type: Actions.ADD, payload: {addInput, setErrorRepeated, setAddInput, text: addInput, id: Math.random().toFixed(4), done: false, edited: false, deleted: false}})
     console.log(todoContext.initialValue)
     // let repeated = false
@@ -184,16 +182,13 @@ function TodoList() {
   // }
 
   function deleteHandle(id: string) {
-    console.log(tasksStatusState)
-    //@ts-ignore
     // setTasksStatusState(tasksStatusState.filter( task => task.id !== id))
-    todoContext.dispatch({type: Actions.DELETE, payload: {id}})
+    todoContext.dispatch({type: Actions.DELETE, id})
     // tasksStatus = tasksStatus.filter( task => task.id !== id)
     // setStateChange(!stateChange)
   }
 
   function editHandle(id: string, newText: string) {
-    //@ts-ignore
     todoContext.dispatch({type: Actions.EDIT, payload: {id, newText, setErrorRepeated}})
     // let isRepeated = false
     // // let copy = tasksStatusState.map( task => ({...task}))
@@ -211,7 +206,6 @@ function TodoList() {
   }
 
   function doneHandle(id: string, done: boolean) {
-    //@ts-ignore
     todoContext.dispatch({type: Actions.DONETOGGLE, payload: {id, done}})
     // let copy = tasksStatusState.map( task => ({...task}))
     // copy.forEach( task => {
@@ -227,7 +221,6 @@ function TodoList() {
   }
 
   function clearAllButtonHandle() {
-    //@ts-ignore
     todoContext.dispatch({type: Actions.CLEARALL})
   }
 
