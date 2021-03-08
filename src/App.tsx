@@ -6,13 +6,13 @@ import './App.css';
 // import Form from "./components/form/Form"
 import TodoList from "./components/todoList/TodoList"
 //@ts-ignore
-import {ContextProvider} from "./components/todoList/todoListContext"
+import { TodoListContextProvider } from "./components/todoList/todoListContext"
 
 function App() {
   return (
-    <ContextProvider>
+    <TodoListContextProvider>
       <TodoList />
-    </ContextProvider>
+    </TodoListContextProvider>
   );
 }
 

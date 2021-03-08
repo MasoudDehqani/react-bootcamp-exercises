@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "styled-components";
 import { THEME_TYPE } from "../constants";
 
 const ThemeSwitcher = () => {
   // No need to change *return* part
   // You have to set themeMode based on context
   const themeMode = THEME_TYPE.LIGHT;
+
+  const themContext = useContext(ThemeContext)
   
-  const handleThemeChange = (e) => {};
+  const handleThemeChange = (e) => {
+    themContext.Styles()
+  };
 
   return (
     <div className="switch-container">

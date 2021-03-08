@@ -13,7 +13,7 @@ function getInitialValue(initialValue: TasksStatus[]) {
   return JSON.parse(savedValue)
 }
 
-export const ContextProvider: React.FC = ({children}) => {
+export const TodoListContextProvider: React.FC = ({children}) => {
   const [todoTasks, dispatch] = useReducer(todoListReducer, [], getInitialValue)
 
   return <TodoListContext.Provider value={{initialValue: todoTasks, dispatch}}>{children}</TodoListContext.Provider>
