@@ -1,10 +1,13 @@
-import React, { createContext } from "react";
+import React, { createContext, useState } from "react";
+import { THEME_TYPE } from "../constants/index";
 import Styles from "../data/Styles"
 
-export const ThemeContext = createContext(Styles)
+export const ThemeContext = createContext({theme: "LIGHT"})
 
 export const ThemeProvider = ({ children }) => {
-  return <ThemeContext.Provider value={Styles}>{children}</ThemeContext.Provider>;
+  const [theme, setTheme] = useState(THEME_TYPE.LIGHT)
+
+  return <ThemeContext.Provider value={{theme, setTheme}}>{children}</ThemeContext.Provider>;
 };
 
 export default ThemeProvider;

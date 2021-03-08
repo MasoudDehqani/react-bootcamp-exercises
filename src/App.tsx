@@ -7,12 +7,14 @@ import './App.css';
 import TodoList from "./components/todoList/TodoList"
 //@ts-ignore
 import { TodoListContextProvider } from "./components/todoList/todoListContext"
+import AppTheme from "./components/theme-switcher/AppTheme"
 
 function App() {
   return (
-    <TodoListContextProvider>
-      <TodoList />
-    </TodoListContextProvider>
+      <AppTheme />
+    // <TodoListContextProvider>
+    //   <TodoList />
+    // </TodoListContextProvider>
   );
 }
 

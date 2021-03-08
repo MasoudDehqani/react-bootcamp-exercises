@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { ThemeContext } from "styled-components";
+import React, { useContext, useState } from "react";
+import { ThemeContext } from "../providers/ThemeProvider";
 import { THEME_TYPE } from "../constants";
 
 const ThemeSwitcher = () => {
@@ -8,9 +8,14 @@ const ThemeSwitcher = () => {
   const themeMode = THEME_TYPE.LIGHT;
 
   const themContext = useContext(ThemeContext)
+  const [checked, setChecked] = useState(false)
   
   const handleThemeChange = (e) => {
-    themContext.Styles()
+    setChecked(!checked)
+    themContext.setTheme( prev => {
+      if (checked) return THEME_TYPE.LIGHT
+      return THEME_TYPE.DARK
+    })
   };
 
   return (
@@ -19,7 +24,7 @@ const ThemeSwitcher = () => {
         <input
           data-testid="theme-changer"
           type="checkbox"
-          checked={themeMode === THEME_TYPE.DARK}
+          checked={checked}
           onChange={handleThemeChange}
         />
         <span className="slider round"></span>

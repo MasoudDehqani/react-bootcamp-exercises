@@ -26,6 +26,7 @@ import InputBase from '@material-ui/core/InputBase';
 import { TextField } from '@material-ui/core';
 
 import todoListReducer from "./todoListReducer"
+//@ts-ignore
 import {ContextProvider, TodoListContext} from "./todoListContext"
 
 import {Actions} from "./todoListReducer"
