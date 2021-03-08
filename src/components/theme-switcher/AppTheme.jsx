@@ -6,6 +6,7 @@ import { THEME_TYPE } from "./constants";
 import Styles from "./data/Styles";
 import {ThemeProvider} from "./providers/ThemeProvider";
 import {ThemeContext} from "./providers/ThemeProvider"
+import "./index.css"
 
 // No need to change *return* part in both StyleTag and App components
 // You have to set themeMode based on context
