@@ -8,10 +8,17 @@ import TodoList from "./components/todoList/TodoList"
 //@ts-ignore
 import { TodoListContextProvider } from "./components/todoList/todoListContext"
 import AppTheme from "./components/theme-switcher/AppTheme"
+import Navbar from "./components/bilingual-webpage/src/components/Navbar"
+import AppBilingual from "../src/components/bilingual-webpage/src/components/AppBilingual"
+import LanguageProvider from "../src/components/bilingual-webpage/src/components/Language"
 
 function App() {
   return (
-      <AppTheme />
+    <LanguageProvider>
+      <AppBilingual />
+    </LanguageProvider>
+    // <Navbar />
+      // <AppTheme />
     // <TodoListContextProvider>
     //   <TodoList />
     // </TodoListContextProvider>

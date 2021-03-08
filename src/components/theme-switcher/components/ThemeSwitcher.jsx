@@ -7,15 +7,15 @@ const ThemeSwitcher = () => {
   // You have to set themeMode based on context
   const themeMode = THEME_TYPE.LIGHT;
 
-  const themContext = useContext(ThemeContext)
-  const [checked, setChecked] = useState(false)
-  
+  const themContext = useContext(ThemeContext);
+  const [checked, setChecked] = useState(false);
+
   const handleThemeChange = (e) => {
-    setChecked(!checked)
-    themContext.setTheme( prev => {
-      if (checked) return THEME_TYPE.LIGHT
-      return THEME_TYPE.DARK
-    })
+    setChecked(!checked);
+    themContext.setTheme((prev) => {
+      if (checked) return THEME_TYPE.LIGHT;
+      return THEME_TYPE.DARK;
+    });
   };
 
   return (
