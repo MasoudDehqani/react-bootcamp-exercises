@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom"
 
 function Header() {
   return (
-    <AppBar position="fixed">
+    <AppBar position="static">
         <Toolbar>
           <List style={{display: "flex"}}>
             <ListItem style={{cursor: "pointer"}}>
