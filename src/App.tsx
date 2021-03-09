@@ -10,10 +10,12 @@ import { TodoListContextProvider } from "./components/todoList/todoListContext"
 import AppTheme from "./components/theme-switcher/AppTheme"
 import Navbar from "./components/bilingual-webpage/src/components/Navbar"
 import AppBilingual from "../src/components/bilingual-webpage/src/components/AppBilingual"
+import Blog from "./components/blog/Blog"
 
 function App() {
   return (
-    <AppBilingual />
+    <Blog />
+    // <AppBilingual />
     // <Navbar />
     // <AppTheme />
     // <TodoListContextProvider>
