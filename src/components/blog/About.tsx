@@ -3,10 +3,7 @@ import Header from "./Header"
 
 function About() {
   return (
-    <>
-      <Header />
-      <h1>About Page</h1>
-    </>
+    <h1>About Page</h1>
   )
 }
 

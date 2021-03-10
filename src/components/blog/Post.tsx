@@ -32,8 +32,6 @@ function Post() {
   }
 
   return (
-    <>
-    <Header />
     <Grid container spacing={7} justify="center" style={{marginTop: '80px'}}>
       {articles.map( ({ id, author, title, urlToImage, description, publishedAt, url }) => 
       <Route key={id} path={`/posts/${id}`}>
@@ -70,7 +68,6 @@ function Post() {
           )}
         
     </Grid>
-    </>
   )
 }
 

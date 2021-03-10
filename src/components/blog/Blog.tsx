@@ -9,10 +9,12 @@ import Posts from './Posts'
 import Home from "./Home"
 import About from "./About"
 import Post from "./Post"
+import Header from "./Header"
 
 function Blog() {
   return (
     <Router>
+      <Header />
       
       <Switch>
         <Route path="/posts/:id" component={Post} />
@@ -20,7 +22,7 @@ function Blog() {
         <Route path="/about" component={About} />
         <Route exact path="/" component={Home} />
         <Route path="*">
-          <h1>Page Dose Not Exist</h1>
+          <h1 style={{marginTop: "80px", textAlign: "center"}}>Page Dose Not Exist</h1>
         </Route>
       </Switch>
     </Router>

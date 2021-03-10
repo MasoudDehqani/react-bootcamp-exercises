@@ -31,8 +31,6 @@ function Posts() {
   console.log(param)
 
   return (
-    <>
-    <Header />
     <Grid container spacing={7} justify="center" style={{marginTop: '80px'}}>
         {articles.map( ({ id, author, title, urlToImage, description, publishedAt }) =>
         
@@ -60,7 +58,6 @@ function Posts() {
         )}
 
     </Grid>
-    </>
   )
 }
 
