@@ -90,3 +90,13 @@ export const articles = [
   publishedAt: "2021-03-08T05:00:00Z"
   }
 ]
+
+export interface DataType {
+  id: string;
+  author: string;
+  title: string;
+  description: string;
+  url: string;
+  urlToImage: string;
+  publishedAt: string;
+}

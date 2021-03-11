@@ -1,5 +1,5 @@
 import React from 'react'
-import { articles } from "./data"
+// import { articles } from "./data"
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -8,8 +8,12 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid"
 import {Link} from "react-router-dom"
-import { useParams } from "react-router-dom"
-import Header from "./Header"
+// import { useParams } from "react-router-dom"
+// import Header from "./Header"
+import { Button, CardActions } from '@material-ui/core';
+import { useSelector, useDispatch } from "react-redux";
+import { deleteActionCreator } from "./blogReducer"
+import { DataType } from './data';
 
 const useStyles = makeStyles({
   root: {
@@ -26,17 +30,19 @@ const useStyles = makeStyles({
 
 function Posts() {
   const classes = useStyles();
+  const dispatch = useDispatch()
 
-  const param = useParams()
-  console.log(param)
+  const articles = useSelector( (state: DataType[]) => state)
+  console.log(articles)
+  const deletePostHandler = (id: string) => dispatch(deleteActionCreator(id)) 
 
   return (
-    <Grid container spacing={7} justify="center" style={{marginTop: '80px'}}>
+    <Grid container spacing={7} justify="center" style={{width: "100%", marginTop: '80px'}}>
         {articles.map( ({ id, author, title, urlToImage, description, publishedAt }) =>
         
         <Grid key={id} item>
-          <Link to={`/posts/${id}`} style={{textDecoration: "none"}}>
-            <Card className={classes.root}>
+          <Card className={classes.root}>
+            <Link to={`/posts/${id}`} style={{textDecoration: "none"}}>
               <CardActionArea>
                 <CardMedia
                   className={classes.media}
@@ -44,7 +50,7 @@ function Posts() {
                   title="Contemplative Reptile"
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
+                  <Typography gutterBottom variant="h5" component="h2" color="textPrimary">
                     {author}
                   </Typography>
                   <Typography variant="body2" color="textSecondary" component="p">
@@ -52,8 +58,13 @@ function Posts() {
                   </Typography>
                 </CardContent>
               </CardActionArea>
-            </Card>
-          </Link>
+            </Link>
+              <CardActions>
+                <Button onClick={ () => deletePostHandler(id)} style={{fontWeight: "bold", marginLeft: "auto"}} size="small" color="secondary">
+                  Delete Post
+                </Button>
+              </CardActions>
+          </Card>
         </Grid>
         )}
 
