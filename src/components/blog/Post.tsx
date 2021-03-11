@@ -13,7 +13,9 @@ import Grid from "@material-ui/core/Grid"
 import { Box } from '@material-ui/core';
 import { useSelector, useDispatch } from "react-redux"
 import { DataType } from './data';
-import { deleteActionCreator } from './blogReducer';
+import { deletePost } from "./blogReducer"
+import { RootState } from './blogStore';
+// import { deleteActionCreator } from './blogReducer';
 
 const useStyles = makeStyles({
   root: {
@@ -30,7 +32,7 @@ const useStyles = makeStyles({
 function Post() {
   const classes = useStyles();
 
-  const articles = useSelector( (state: DataType[]) => state)
+  const articles = useSelector( (state: RootState) => state.posts.data)
   const dispatch = useDispatch()
 
   const history = useHistory()
@@ -41,7 +43,7 @@ function Post() {
   }
 
   const deleteAndGoBack = (id: string) => {
-    dispatch(deleteActionCreator(id))
+    dispatch(deletePost(id))
     history.goBack()
   }
 

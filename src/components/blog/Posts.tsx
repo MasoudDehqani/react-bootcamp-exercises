@@ -12,8 +12,10 @@ import {Link} from "react-router-dom"
 // import Header from "./Header"
 import { Button, CardActions } from '@material-ui/core';
 import { useSelector, useDispatch } from "react-redux";
-import { deleteActionCreator } from "./blogReducer"
+// import { deleteActionCreator } from "./blogReducer"
 import { DataType } from './data';
+import blogReducer, { deletePost, BlogPostState } from "./blogReducer"
+import { RootState } from "./blogStore"
 
 const useStyles = makeStyles({
   root: {
@@ -32,9 +34,9 @@ function Posts() {
   const classes = useStyles();
   const dispatch = useDispatch()
 
-  const articles = useSelector( (state: DataType[]) => state)
+  const articles = useSelector( (state: RootState) => state.posts.data)
   console.log(articles)
-  const deletePostHandler = (id: string) => dispatch(deleteActionCreator(id)) 
+  const deletePostHandler = (id: string) => dispatch(deletePost(id)) 
 
   return (
     <Grid container spacing={7} justify="center" style={{width: "100%", marginTop: '80px'}}>
