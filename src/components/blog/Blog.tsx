@@ -10,6 +10,7 @@ import Home from "./Home"
 import About from "./About"
 import Post from "./Post"
 import Header from "./Header"
+import SelectPost from './SelectPost'
 
 function Blog() {
   return (
@@ -17,8 +18,8 @@ function Blog() {
       <Header />
       
       <Switch>
-        <Route path="/posts/:id" component={Post} />
-        <Route path="/posts" component={Posts} />
+        {/* <Route path="/posts/:id" component={Post} /> */}
+        <Route path="/posts" component={SelectPost} />
         <Route path="/about" component={About} />
         <Route exact path="/" component={Home} />
         <Route path="*">
