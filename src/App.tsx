@@ -10,15 +10,15 @@ import './App.css';
 // import AppTheme from "./components/theme-switcher/AppTheme"
 // import Navbar from "./components/bilingual-webpage/src/components/Navbar"
 // import AppBilingual from "../src/components/bilingual-webpage/src/components/AppBilingual"
-import Blog from "./components/blog/Blog"
-import {Provider} from "react-redux"
-import store from "./components/blog/blogStore"
+import TodolistRedux from "./components/todoList/todoListRedux/TodoList__Redux"
+
 
 function App() {
   return (
-    <Provider store={store}>
-      <Blog />
-    </Provider>
+    <TodolistRedux />
+    // <Provider store={store}>
+    //   <Blog />
+    // </Provider>
     // <AppBilingual />
     // <Navbar />
     // <AppTheme />
